@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var cors = require('cors');
@@ -33,6 +32,7 @@ app.post('/employee',function(req, resp){
 
     });
 });
+
 
 //Getting all the employees in the database
 app.get("/employees", function(req, resp){
@@ -69,9 +69,8 @@ app.put('/employee/:id', function (req, resp) {
 
       var condition = { _id: req.params.id};
       var update = req.body;
-      var options = {multi: true};
 
-      db.update(condition, update, options, function(err, data) {
+      db.update(condition, update, function(err, data) {
           if(err){
               resp.status(500).send();
           } else {
