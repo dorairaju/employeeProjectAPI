@@ -6,6 +6,8 @@ var empSchema = new Schema({
     fName: String,
     lName: String,
     mName: String,
+    created_at: Date,
+    updated_at: Date
   },
   {
     collection: 'employees'
@@ -17,7 +19,7 @@ empSchema.pre('save', function(next){
 
     this.updated_at = currentDate;
     if (!this.created_at){
-        this.created_at = new Date();
+        this.created_at = currentDate;
     }
     next();
 });
